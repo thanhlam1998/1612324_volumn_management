@@ -16,5 +16,29 @@ namespace _1612324_compress_volume
         {
             InitializeComponent();
         }
+
+        private void ViewDialog_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void SetContent (string text)
+        {
+            richTextBox.Text = text;
+        }
+
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
+        private void ViewDialog_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)27)
+            {
+                Hide();
+            }
+        }
     }
 }

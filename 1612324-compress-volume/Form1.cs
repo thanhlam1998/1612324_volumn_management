@@ -414,10 +414,8 @@ namespace _1612324_compress_volume
             {
                 return;
             }
-
             //clear list
             listView.Items.Clear();
-
             // if no zip file, we are done
             if (_zipFile.FileName == string.Empty)
             {
@@ -425,7 +423,6 @@ namespace _1612324_compress_volume
                 UpdateMenus();
                 return;
             }
-
             // fill out list 
             var zec = _zipFile.Entries;
             listView.BeginUpdate();
@@ -585,6 +582,58 @@ namespace _1612324_compress_volume
             }
 
             UpdateUI();
+        }
+
+        // show current file in read-only editor
+        private void mnuViewEntry_Click(object sender, EventArgs e)
+        {
+            // get first selected file
+            C1ZipEntry ze = null;
+            foreach (ListViewItem lvi in listView.SelectedItems)
+            {
+                var zeItem = (C1ZipEntry)lvi.Tag;
+                if ((zeItem.Attributes & FileAttributes.Directory) != 0)
+                {
+                    continue;
+                }
+                ze = zeItem;
+                break;
+            }
+            if (ze == null) return;
+
+            // read file content
+            var sb = new StringBuilder();
+            using (var entry = ze.OpenReader())
+            {
+                var sr = new StreamReader(entry, Encoding.Default);
+                // max line: 1,000,000 lines
+                while (!sr.EndOfStream && sb.Length < 1000000)
+                {
+                    sb.Append(sr.ReadLine());
+                }
+            }
+
+            // show in ViewDialog
+            var view = new ViewDialog();
+            view.Text = "View: " + ze.FileName;
+            view.SetContent(sb.ToString());
+            view.ShowDialog();
+        }
+
+        private void mnuLevel_Click(object sender, EventArgs e)
+        {
+            // adjust checkmarks
+            var item = (ToolStripMenuItem)sender;
+           foreach (ToolStripMenuItem mi in mnuLevel.DropDownItems)
+            {
+                mi.Checked = mi.Equals(item);
+            }
+
+            // switch view
+            if (item.Equals(mnuLevelDefault)) _zipFile.CompressionLevel = CompressionLevelEnum.DefaultCompression;
+            if (item.Equals(mnuLevelBest)) _zipFile.CompressionLevel = CompressionLevelEnum.BestCompression;
+            if (item.Equals(mnuLevelFast)) _zipFile.CompressionLevel = CompressionLevelEnum.BestSpeed;
+            if (item.Equals(mnuLevelNone)) _zipFile.CompressionLevel = CompressionLevelEnum.NoCompression;
         }
     }
 }

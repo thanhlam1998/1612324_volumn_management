@@ -285,28 +285,36 @@
             // mnuLevelDefault
             // 
             this.mnuLevelDefault.Checked = true;
+            this.mnuLevelDefault.CheckOnClick = true;
             this.mnuLevelDefault.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuLevelDefault.Name = "mnuLevelDefault";
-            this.mnuLevelDefault.Size = new System.Drawing.Size(178, 22);
+            this.mnuLevelDefault.Size = new System.Drawing.Size(180, 22);
             this.mnuLevelDefault.Text = "&Default";
+            this.mnuLevelDefault.Click += new System.EventHandler(this.mnuLevel_Click);
             // 
             // mnuLevelBest
             // 
+            this.mnuLevelBest.CheckOnClick = true;
             this.mnuLevelBest.Name = "mnuLevelBest";
-            this.mnuLevelBest.Size = new System.Drawing.Size(178, 22);
+            this.mnuLevelBest.Size = new System.Drawing.Size(180, 22);
             this.mnuLevelBest.Text = "Best &Compression";
+            this.mnuLevelBest.Click += new System.EventHandler(this.mnuLevel_Click);
             // 
             // mnuLevelFast
             // 
+            this.mnuLevelFast.CheckOnClick = true;
             this.mnuLevelFast.Name = "mnuLevelFast";
-            this.mnuLevelFast.Size = new System.Drawing.Size(178, 22);
+            this.mnuLevelFast.Size = new System.Drawing.Size(180, 22);
             this.mnuLevelFast.Text = "Best &Speed";
+            this.mnuLevelFast.Click += new System.EventHandler(this.mnuLevel_Click);
             // 
             // mnuLevelNone
             // 
+            this.mnuLevelNone.CheckOnClick = true;
             this.mnuLevelNone.Name = "mnuLevelNone";
-            this.mnuLevelNone.Size = new System.Drawing.Size(178, 22);
+            this.mnuLevelNone.Size = new System.Drawing.Size(180, 22);
             this.mnuLevelNone.Text = "&No Compression";
+            this.mnuLevelNone.Click += new System.EventHandler(this.mnuLevel_Click);
             // 
             // mnuPassword
             // 
@@ -326,8 +334,9 @@
             // mnuViewEntry
             // 
             this.mnuViewEntry.Name = "mnuViewEntry";
-            this.mnuViewEntry.Size = new System.Drawing.Size(164, 22);
-            this.mnuViewEntry.Text = "Current Entry...";
+            this.mnuViewEntry.Size = new System.Drawing.Size(156, 22);
+            this.mnuViewEntry.Text = "File Content...";
+            this.mnuViewEntry.Click += new System.EventHandler(this.mnuViewEntry_Click);
             // 
             // menuStrip1
             // 
